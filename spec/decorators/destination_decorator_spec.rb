@@ -7,7 +7,7 @@ describe DestinationDecorator do
     let(:destination) { Destination.new }
     subject { decorate(destination) }
     it { should be_a Destination }
-    its(:status_label) { should eq '<span class="label">None</span>' }
+    its(:status_label) { should eq '<span class="label none">None</span>' }
   end
 
   describe 'change status' do
@@ -16,10 +16,10 @@ describe DestinationDecorator do
       FactoryGirl.create(:sg_card)
       @destination = decorate(d)
     end
-    it { @destination.status_label.should eq '<span class="label">In progress</span>' }
+    it { @destination.status_label.should eq '<span class="label in_progress">In progress</span>' }
     it {
       @destination.card.status = :ready
-      @destination.status_label.should eq '<span class="label">Ready</span>'
+      @destination.status_label.should eq '<span class="label ready">Ready</span>'
     }
   end
 end
