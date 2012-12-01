@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/sinsoku/active_decorator.git
+  revision: 7125b68128ff289261a23dcf4562757dba47d069
+  branch: support_rspec
+  specs:
+    active_decorator (0.3.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -177,6 +184,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_decorator!
   bootstrap-sass (>= 2.1.1.0)
   capybara (>= 1.1.3)
   coffee-rails (~> 3.2.1)

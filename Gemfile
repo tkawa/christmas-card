@@ -8,6 +8,7 @@ gem 'haml', '>= 3.1.7'
 gem 'bootstrap-sass', '>= 2.1.1.0'
 gem 'simple_form', '>= 2.0.4'
 gem 'enumerize'
+gem 'active_decorator', git: 'git://github.com/sinsoku/active_decorator.git', branch: 'support_rspec'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -20,7 +21,7 @@ group :development do
   gem 'hpricot', '>= 0.8.6'
   gem 'ruby_parser', '>= 3.0.1'
   gem 'quiet_assets', '>= 1.0.1'
-  gem 'hub', '>= 1.10.2', :require => nil
+  gem 'hub', '>= 1.10.2', require: nil
 end
 
 group :development, :test do
