@@ -7,6 +7,7 @@ gem 'thin', '>= 1.5.0'
 gem 'haml', '>= 3.1.7'
 gem 'bootstrap-sass', '>= 2.1.1.0'
 gem 'simple_form', '>= 2.0.4'
+gem 'enumerize'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
