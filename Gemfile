@@ -30,4 +30,8 @@ group :development, :test do
   gem 'database_cleaner', '>= 0.9.1'
   gem 'email_spec', '>= 1.4.0'
   gem 'factory_girl_rails', '>= 4.1.0'
+  gem 'spork'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent', '~> 0.9.1'
 end
