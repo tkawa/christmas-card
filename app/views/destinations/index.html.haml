@@ -1,0 +1,21 @@
+%h1 Listing destinations
+
+%table
+  %tr
+    %th Email
+    %th Name
+    %th
+    %th
+    %th
+
+  - @destinations.each do |destination|
+    %tr
+      %td= destination.email
+      %td= destination.name
+      %td= link_to 'Show', destination
+      %td= link_to 'Edit', edit_destination_path(destination)
+      %td= link_to 'Destroy', destination, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Destination', new_destination_path
