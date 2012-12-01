@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201110149) do
+ActiveRecord::Schema.define(:version => 20121201165744) do
 
   create_table "cards", :force => true do |t|
     t.string   "status",         :default => "in_progress", :null => false
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(:version => 20121201110149) do
   create_table "destinations", :force => true do |t|
     t.string   "email",      :default => "", :null => false
     t.string   "name",       :default => "", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "name",       :default => "", :null => false
+    t.string   "image_url"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
