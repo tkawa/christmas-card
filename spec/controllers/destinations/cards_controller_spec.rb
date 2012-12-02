@@ -100,7 +100,7 @@ describe Destinations::CardsController do
       it "redirects to the destinations_card" do
         card = @destination.create_card! valid_attributes
         put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
-        response.should redirect_to([@destination, card])
+        response.should redirect_to(destination_card_url(card))
       end
     end
 

@@ -43,7 +43,7 @@ class Destinations::CardsController < ApplicationController
 
     respond_to do |format|
       if @card.update_attributes(params[:card])
-        format.html { redirect_to [@destination, @card], notice: 'Card was successfully updated.' }
+        format.html { redirect_to destination_card_url(@card), notice: 'Card was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
