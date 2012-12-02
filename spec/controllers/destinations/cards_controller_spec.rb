@@ -61,52 +61,34 @@ describe Destinations::CardsController do
   end
 
   describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Card" do
-        expect {
-          post :create, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
-        }.to change(Card, :count).by(1)
-      end
-
-      it "assigns a newly created destinations_card as @destinations_card" do
-        post :create, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
-        assigns(:card).should be_a(Card)
-        assigns(:card).should be_persisted
-      end
-
-      it "redirects to the created destinations_card" do
-        post :create, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
-        response.should redirect_to([@destination, Card.last])
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved destinations_card as @destinations_card" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Card.any_instance.stub(:save).and_return(false)
-        post :create, {:destination_id => @destination.id, :card => {  }}, valid_session
-        assigns(:card).should be_a_new(Card)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Card.any_instance.stub(:save).and_return(false)
-        post :create, {:destination_id => @destination.id, :card => {  }}, valid_session
-        response.should render_template("new")
-      end
+    it "not implemented" do
+      post :create, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
+      response.status.should be 501
     end
   end
 
   describe "PUT update" do
     describe "with valid params" do
+      it "creates a new Card" do
+        expect {
+          put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
+        }.to change(Card, :count).by(1)
+      end
+
+      it "assigns a newly created destinations_card as @destinations_card" do
+        put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
+        assigns(:card).should be_a(Card)
+        assigns(:card).should be_persisted
+      end
+
       it "updates the requested destinations_card" do
         card = @destination.create_card! valid_attributes
         # Assuming there are no other destinations_cards in the database, this
         # specifies that the Card created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Card.any_instance.should_receive(:update_attributes).with({ "these" => "params" })
-        put :update, {:destination_id => @destination.id, :card => { "these" => "params" }}, valid_session
+        Card.any_instance.should_receive(:update_attributes).with({ "status" => "ready" })
+        put :update, {:destination_id => @destination.id, :card => { "status" => "ready" }}, valid_session
       end
 
       it "assigns the requested destinations_card as @destinations_card" do
@@ -123,6 +105,13 @@ describe Destinations::CardsController do
     end
 
     describe "with invalid params" do
+      it "assigns a newly created but unsaved destinations_card as @destinations_card" do
+        # Trigger the behavior that occurs when invalid params are submitted
+        Card.any_instance.stub(:save).and_return(false)
+        put :update, {:destination_id => @destination.id, :card => {  }}, valid_session
+        assigns(:card).should be_a_new(Card)
+      end
+
       it "assigns the destinations_card as @destinations_card" do
         card = @destination.create_card! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted

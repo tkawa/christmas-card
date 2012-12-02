@@ -32,23 +32,14 @@ class Destinations::CardsController < ApplicationController
   # POST /destinations/:destination_id/card
   # POST /destinations/:destination_id/card.json
   def create
-    @card = @destination.build_card(params[:card])
-
-    respond_to do |format|
-      if @card.save
-        format.html { redirect_to [@destination, @card], notice: 'Card was successfully created.' }
-        format.json { render json: @card, status: :created, location: @card }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @card.errors, status: :unprocessable_entity }
-      end
-    end
+    # TODO: Using Special exception with rescue_from
+    head :not_implemented # 501
   end
 
   # PUT /destinations/:destination_id/card
   # PUT /destinations/:destination_id/card.json
   def update
-    @card = @destination.card
+    @card = @destination.card || @destination.build_card
 
     respond_to do |format|
       if @card.update_attributes(params[:card])
