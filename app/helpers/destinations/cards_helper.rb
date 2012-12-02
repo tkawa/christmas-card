@@ -1,0 +1,2 @@
+module Destinations::CardsHelper
+end
