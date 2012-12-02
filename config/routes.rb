@@ -1,9 +1,10 @@
 ChristmasCard::Application.routes.draw do
+  resources :destinations do
+    resource :card do
+      resources :comments
+    end
+  end
   resources :members
 
-
-  resources :destinations
-
-
-  root :to => "home#index"
+  root to: 'home#index', via: :get
 end

@@ -3,18 +3,22 @@
 
 %table.table.table-striped
   %tr
+    %th
     %th Name
     %th Email
-    %th Status
+    %th Comment
     %th
     %th
     %th
 
   - @destinations.each do |destination|
     %tr
+      %td
+        = link_to destination.status_label, destination_card_path(destination)
       %td= destination.name
       %td= destination.email
-      %td= destination.status_label
+      %td
+        -#= link_to 'Add', new_destination_card_comment_path(destination)
       %td= link_to 'Show', destination
       %td= link_to 'Edit', edit_destination_path(destination)
       %td= link_to 'Destroy', destination, method: :delete, data: { confirm: 'Are you sure?' }
