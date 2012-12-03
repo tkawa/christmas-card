@@ -38,22 +38,36 @@ describe Destinations::CardsController do
   end
 
   describe "GET show" do
-    it "assigns the requested destinations_card as @destinations_card" do
-      card = @destination.create_card! valid_attributes
-      get :show, {:destination_id => @destination.id}, valid_session
-      assigns(:card).should eq(card)
+    describe "exists" do
+      it "assigns the requested card as @card" do
+        card = @destination.create_card! valid_attributes
+        get :show, {:destination_id => @destination.id}, valid_session
+        assigns(:card).should eq(card)
+      end
+    end
+    describe "not exists" do
+      it "destination" do
+        expect {
+          get :show, {:destination_id => 999}, valid_session
+        }.to raise_error ActiveRecord::RecordNotFound
+      end
+      it "card" do
+        destination = Destination.create!(name: 'Name', email: 'email@example.com')
+        get :show, {:destination_id => destination.id}, valid_session
+        response.status.should be 404
+      end
     end
   end
 
   describe "GET new" do
-    it "assigns a new destinations_card as @destinations_card" do
+    it "assigns a new card as @card" do
       get :new, {:destination_id => @destination.id}, valid_session
       assigns(:card).should be_a_new(Card)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested destinations_card as @destinations_card" do
+    it "assigns the requested card as @card" do
       card = @destination.create_card! valid_attributes
       get :edit, {:destination_id => @destination.id}, valid_session
       assigns(:card).should eq(card)
@@ -75,15 +89,15 @@ describe Destinations::CardsController do
         }.to change(Card, :count).by(1)
       end
 
-      it "assigns a newly created destinations_card as @destinations_card" do
+      it "assigns a newly created card as @card" do
         put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
         assigns(:card).should be_a(Card)
         assigns(:card).should be_persisted
       end
 
-      it "updates the requested destinations_card" do
+      it "updates the requested card" do
         card = @destination.create_card! valid_attributes
-        # Assuming there are no other destinations_cards in the database, this
+        # Assuming there are no other cards in the database, this
         # specifies that the Card created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
@@ -91,13 +105,13 @@ describe Destinations::CardsController do
         put :update, {:destination_id => @destination.id, :card => { "status" => "ready" }}, valid_session
       end
 
-      it "assigns the requested destinations_card as @destinations_card" do
+      it "assigns the requested card as @card" do
         card = @destination.create_card! valid_attributes
         put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
         assigns(:card).should eq(card)
       end
 
-      it "redirects to the destinations_card" do
+      it "redirects to the card" do
         card = @destination.create_card! valid_attributes
         put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
         response.should redirect_to(destination_card_url(card))
@@ -105,14 +119,14 @@ describe Destinations::CardsController do
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved destinations_card as @destinations_card" do
+      it "assigns a newly created but unsaved card as @card" do
         # Trigger the behavior that occurs when invalid params are submitted
         Card.any_instance.stub(:save).and_return(false)
         put :update, {:destination_id => @destination.id, :card => {  }}, valid_session
         assigns(:card).should be_a_new(Card)
       end
 
-      it "assigns the destinations_card as @destinations_card" do
+      it "assigns the card as @card" do
         card = @destination.create_card! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Card.any_instance.stub(:save).and_return(false)
@@ -131,14 +145,14 @@ describe Destinations::CardsController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested destinations_card" do
+    it "destroys the requested card" do
       card = @destination.create_card! valid_attributes
       expect {
         delete :destroy, {:destination_id => @destination.id}, valid_session
       }.to change(Card, :count).by(-1)
     end
 
-    it "redirects to the destinations_cards list" do
+    it "redirects to the cards list" do
       card = @destination.create_card! valid_attributes
       delete :destroy, {:destination_id => @destination.id}, valid_session
       response.should redirect_to(destination_card_url(@destination))

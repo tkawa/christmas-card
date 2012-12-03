@@ -4,12 +4,17 @@ class Destinations::CardsController < ApplicationController
   # GET /destinations/:destination_id/card
   # GET /destinations/:destination_id/card.json
   def show
-    @card = @destination.card || @destination.build_card
+    @card, status =
+      if @destination.card
+        [@destination.card, :ok]
+      else
+        [@destination.build_card, :not_found]
+      end
     #@card = Card.where(destination_id: params[:destination_id]).first_or_initialize
 
     respond_to do |format|
-      format.html # show.html.haml
-      format.json { render json: @card }
+      format.html { render status: status } # show.html.haml
+      format.json { render json: @card, status: status }
     end
   end
 
