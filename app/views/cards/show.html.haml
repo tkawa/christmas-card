@@ -1,0 +1,12 @@
+.well
+  %h2 To #{@destination.name}
+
+%p= image_tag 'xmas71.jpg'
+
+%dl.comments
+  - @card.comments.each do |comment|
+    = render partial: 'comments/comment', locals: { comment: comment }
+
+%p
+  Image credits:
+  = link_to nil, 'http://www.imagehearts.com/ip/'

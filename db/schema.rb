@@ -15,11 +15,13 @@ ActiveRecord::Schema.define(:version => 20121202085308) do
 
   create_table "cards", :force => true do |t|
     t.string   "status",         :default => "in_progress", :null => false
+    t.string   "access_token"
     t.integer  "destination_id",                            :null => false
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
 
+  add_index "cards", ["access_token"], :name => "index_cards_on_access_token", :unique => true
   add_index "cards", ["destination_id"], :name => "index_cards_on_destination_id"
 
   create_table "comments", :force => true do |t|

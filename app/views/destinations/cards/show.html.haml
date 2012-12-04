@@ -1,19 +1,24 @@
--#%p= image_tag 'xmas71.jpg'
-
 .well
   %h2 To #{@destination.name}
 
   %p
     Status:
     = @destination.status_label
+  - if @card.ready? || @card.sent?
+    %p
+      Access URL:
+      = link_to nil, card_url(id: @card.access_token)
 
   = form_tag destination_card_path(@destination), method: :put, class: 'status_buttons' do
     - Card.status.values.each do |status|
       = button_tag status.humanize, name: 'card[status]', value: status, disabled: status == @card.status, class: ['btn', status]
 
+- if @card.ready? || @card.sent?
+  %p= image_tag 'xmas71.jpg'
+
 %dl.comments
   - @card.comments.each do |comment|
-    = render partial: 'comments/comment', locals: { comment: comment }
+    = render partial: 'comments/comment_editable', locals: { comment: comment }
 
 = form_tag destination_card_comments_path(@destination) do
   Add:
@@ -21,10 +26,8 @@
     = button_tag member.name, name: 'comment[member_id]', value: member.id, class: 'btn btn-small'
 
 %br
--#= link_to 'Edit', edit_destination_card_path(@card)
-\|
 = link_to 'Back', destinations_path
 
 %p
-  &copy;
+  Image credits:
   = link_to nil, 'http://www.imagehearts.com/ip/'

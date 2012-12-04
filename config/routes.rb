@@ -5,6 +5,7 @@ ChristmasCard::Application.routes.draw do
     end
   end
   resources :members
+  resources :cards, only: :show
 
   root to: 'home#index', via: :get
 end

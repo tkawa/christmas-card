@@ -3,8 +3,9 @@
 FactoryGirl.define do
   factory :sg_card, class: Card do
     id 1
-    status 'in_progress'
+    status 'ready'
     destination_id 1
+    access_token '8W8MfGTLspVAAgf8jihB'
     #association :destination, factory: :sonic_garden
     #after(:create) do |card|
     #  card.destination = Destination.find_by_email("dest@sonicgarden.jp") || FactoryGirl.create(:sonic_garden)

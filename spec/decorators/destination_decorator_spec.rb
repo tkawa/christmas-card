@@ -16,10 +16,10 @@ describe DestinationDecorator do
       FactoryGirl.create(:sg_card)
       @destination = decorate(d)
     end
-    it { @destination.status_label.should eq '<span class="label in_progress">In progress</span>' }
+    it { @destination.status_label.should eq '<span class="label ready">Ready</span>' }
     it {
-      @destination.card.status = :ready
-      @destination.status_label.should eq '<span class="label ready">Ready</span>'
+      @destination.card.status = :sent
+      @destination.status_label.should eq '<span class="label sent">Sent</span>'
     }
   end
 end

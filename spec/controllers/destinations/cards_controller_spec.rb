@@ -97,11 +97,7 @@ describe Destinations::CardsController do
 
       it "updates the requested card" do
         card = @destination.create_card! valid_attributes
-        # Assuming there are no other cards in the database, this
-        # specifies that the Card created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Card.any_instance.should_receive(:update_attributes).with({ "status" => "ready" })
+        Card.any_instance.should_receive(:assign_attributes).with({ "status" => "ready" })
         put :update, {:destination_id => @destination.id, :card => { "status" => "ready" }}, valid_session
       end
 

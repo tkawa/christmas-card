@@ -46,9 +46,15 @@ class Destinations::CardsController < ApplicationController
   # PUT /destinations/:destination_id/card.json
   def update
     @card = @destination.card || @destination.build_card
+    @card.attributes = params[:card]
+    if @card.in_progress?
+      @card.access_token = nil
+    elsif @card.ready? || @card.sent?
+      @card.generate_access_token
+    end
 
     respond_to do |format|
-      if @card.update_attributes(params[:card])
+      if @card.save
         format.html { redirect_to destination_card_url(@card), notice: 'Card was successfully updated.' }
         format.json { head :no_content }
       else
