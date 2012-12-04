@@ -1,3 +1,15 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+  $('.comment_body').editable(
+    onblur: 'ignore'
+    send: 'always'
+    params: (standard) ->
+      obj = {}
+      data = {}
+      obj[@options.name] = standard.value
+      data[@options.resource] = obj
+      data.name = data.value = data.pk = null
+      data
+    ajaxOptions: {
+      type: 'PUT'
+    }
+  )

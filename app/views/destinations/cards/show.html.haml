@@ -3,9 +3,10 @@
 %dl.comments
   - @card.comments.each do |comment|
     %dt
-      = image_tag comment.member.image_url
+      -#= image_tag comment.member.image_url
       = comment.member.name
-    %dd= comment.body
+    %dd
+      %a.comment_body{data: {type: 'textarea', resource: 'comment', name: 'body', url: comment_path(comment)}}= comment.body
 
 -#= link_to 'Edit', edit_destination_card_path(@card)
 \|
