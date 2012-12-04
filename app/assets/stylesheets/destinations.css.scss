@@ -7,12 +7,18 @@ span.label.ready {
 span.label.sent {
   @extend .label-success;
 }
-form.delete_button {
+form.only_button {
   display: inline;
 }
+button.create {
+  @extend .btn;
+  @extend .btn-primary;
+}
 button.delete {
-  @extend .pull-right;
   @extend .btn;
   @extend .btn-danger;
   @extend .btn-mini;
+}
+dl.comments button.delete {
+  @extend .pull-right;
 }

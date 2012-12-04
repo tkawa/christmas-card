@@ -3,11 +3,10 @@
 
 %table.table.table-striped
   %tr
-    %th
+    %th Card
     %th Name
     %th Email
     %th Comment
-    %th
     %th
     %th
 
@@ -18,10 +17,13 @@
       %td= destination.name
       %td= destination.email
       %td
-        -#= link_to 'Add', new_destination_card_comment_path(destination)
-      %td= link_to 'Show', destination
+        - if destination.card
+          - destination.card.written_members.each do |member|
+            %span.label.label-inverse= member.name
       %td= link_to 'Edit', edit_destination_path(destination)
-      %td= link_to 'Destroy', destination, method: :delete, data: { confirm: 'Are you sure?' }
+      %td
+        = form_for destination, method: :delete, html: { class: 'only_button', id: nil } do |f|
+          = f.button 'Delete', confirm: 'Are you sure to delete?', class: 'delete'
 
 %br
 
