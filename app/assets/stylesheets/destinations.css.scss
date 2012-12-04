@@ -2,10 +2,23 @@ span.label.in_progress {
   @extend .label-warning;
 }
 span.label.ready {
-  @extend .label-important;
+  @extend .label-success;
 }
 span.label.sent {
-  @extend .label-success;
+  @extend .label-info;
+}
+button.in_progress {
+  @extend .btn-warning;
+}
+button.ready {
+  @extend .btn-success;
+}
+button.sent {
+  @extend .btn-info;
+}
+.status_buttons {
+  text-align: right;
+  margin: 0;
 }
 form.only_button {
   display: inline;

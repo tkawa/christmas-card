@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
-        format.html { redirect_to destination_card_url(@comment.card), notice: 'Comment was successfully updated.' }
+        format.html { redirect_to destination_card_url(@comment.card.destination), notice: 'Comment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render 'destinations/cards/show' }
@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to destination_card_url(@comment.card), notice: 'Comment was successfully deleted.' }
+      format.html { redirect_to destination_card_url(@comment.card.destination), notice: 'Comment was successfully deleted.' }
       format.json { head :no_content }
     end
   end

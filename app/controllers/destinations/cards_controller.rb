@@ -9,7 +9,7 @@ class Destinations::CardsController < ApplicationController
         [@destination.card, :ok]
       else
         flash.now[:notice] = 'Card is not created yet.'
-        [@destination.build_card(status: :in_progress), :not_found]
+        [@destination.build_card, :not_found]
       end
     #@card = Card.where(destination_id: params[:destination_id]).first_or_initialize
 

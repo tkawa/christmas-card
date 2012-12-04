@@ -2,6 +2,7 @@ $ ->
   $('.comment_body').editable(
     onblur: 'ignore'
     send: 'always'
+    inputclass: 'span9'
     params: (standard) ->
       obj = {}
       data = {}

@@ -1,5 +1,16 @@
 -#%p= image_tag 'xmas71.jpg'
 
+.well
+  %h2 To #{@destination.name}
+
+  %p
+    Status:
+    = @destination.status_label
+
+  = form_tag destination_card_path(@destination), method: :put, class: 'status_buttons' do
+    - Card.status.values.each do |status|
+      = button_tag status.humanize, name: 'card[status]', value: status, disabled: status == @card.status, class: ['btn', status]
+
 %dl.comments
   - @card.comments.each do |comment|
     = render partial: 'comments/comment', locals: { comment: comment }
