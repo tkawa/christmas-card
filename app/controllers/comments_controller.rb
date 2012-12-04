@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to destination_card_url(@comment.card) }
+      format.html { redirect_to destination_card_url(@comment.card), notice: 'Comment was successfully deleted.' }
       format.json { head :no_content }
     end
   end

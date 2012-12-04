@@ -7,3 +7,12 @@ span.label.ready {
 span.label.sent {
   @extend .label-success;
 }
+form.delete_button {
+  display: inline;
+}
+button.delete {
+  @extend .pull-right;
+  @extend .btn;
+  @extend .btn-danger;
+  @extend .btn-mini;
+}
