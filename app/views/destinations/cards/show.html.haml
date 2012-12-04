@@ -1,8 +1,11 @@
-%p#notice= notice
+-#%p= image_tag 'xmas71.jpg'
 
-%p= image_tag 'xmas71.jpg'
-
-
+%dl.comments
+  - @card.comments.each do |comment|
+    %dt
+      = image_tag comment.member.image_url
+      = comment.member.name
+    %dd= comment.body
 
 -#= link_to 'Edit', edit_destination_card_path(@card)
 \|

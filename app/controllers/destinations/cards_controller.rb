@@ -8,6 +8,7 @@ class Destinations::CardsController < ApplicationController
       if @destination.card
         [@destination.card, :ok]
       else
+        flash.now[:notice] = 'Card is not created yet.'
         [@destination.build_card, :not_found]
       end
     #@card = Card.where(destination_id: params[:destination_id]).first_or_initialize

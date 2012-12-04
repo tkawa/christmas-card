@@ -2,6 +2,8 @@ require 'factory_girl'
 
 Destination.delete_all
 Card.delete_all
+Member.delete_all
+Comment.delete_all
 
 # Destination
 FactoryGirl.create(:sonic_garden)
