@@ -1,0 +1,6 @@
+%dt
+  -#= image_tag comment.member.image_url
+  = comment.member.name
+%dd
+  %a.comment_body{data: {type: 'textarea', resource: 'comment', name: 'body', url: comment_path(comment)}}<
+    ~ comment.body_html
