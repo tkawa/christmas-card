@@ -3,6 +3,7 @@ require 'spec_helper'
 describe CommentsController do
   before do
     @destination = FactoryGirl.create(:sonic_garden)
+    @destination_without_card = FactoryGirl.create(:fjord)
     @card = FactoryGirl.create(:sg_card)
   end
 
@@ -21,17 +22,46 @@ describe CommentsController do
           post :create, {:destination_id => @destination.id, :comment => valid_attributes}, valid_session
         }.to change(Comment, :count).by(1)
       end
+
+      it "assigns a newly created comment as @comment" do
+        post :create, {:destination_id => @destination.id, :comment => valid_attributes}, valid_session
+        assigns(:comment).should be_a(Comment)
+        assigns(:comment).should be_persisted
+      end
+
+      it "redirects to the parent card" do
+        post :create, {:destination_id => @destination.id, :comment => valid_attributes}, valid_session
+        response.should redirect_to(destination_card_url(Comment.last.card))
+      end
     end
 
-    it "assigns a newly created comment as @comment" do
-      post :create, {:destination_id => @destination.id, :comment => valid_attributes}, valid_session
-      assigns(:comment).should be_a(Comment)
-      assigns(:comment).should be_persisted
+    describe "when card not found" do
+      it "creates a new Comment" do
+        expect {
+          post :create, {:destination_id => @destination_without_card.id, :comment => valid_attributes}, valid_session
+        }.to change(Comment, :count).by(1)
+      end
+
+      it "assigns a newly created comment as @comment" do
+        post :create, {:destination_id => @destination_without_card.id, :comment => valid_attributes}, valid_session
+        assigns(:comment).should be_a(Comment)
+        assigns(:comment).should be_persisted
+        assigns(:comment).card.should be_persisted
+      end
+
+      it "redirects to the parent card" do
+        post :create, {:destination_id => @destination_without_card.id, :comment => valid_attributes}, valid_session
+        response.should redirect_to(destination_card_url(Comment.last.card))
+      end
     end
 
-    it "redirects to the parent card" do
-      post :create, {:destination_id => @destination.id, :comment => valid_attributes}, valid_session
-      response.should redirect_to(destination_card_url(Comment.last.card))
+    describe "with invalid params" do
+      describe "when card not found" do
+        it "re-renders the 'edit' template" do
+          post :create, {:destination_id => @destination_without_card.id, :comment => { }}, valid_session
+          response.should render_template('destinations/cards/show')
+        end
+      end
     end
   end
 

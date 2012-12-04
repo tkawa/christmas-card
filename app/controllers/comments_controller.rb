@@ -4,16 +4,16 @@ class CommentsController < ApplicationController
   def create
     @destination = Destination.find(params[:destination_id])
     begin
-      @comment = @destination.card.comments.build(params[:comment])
-    rescue NoMethodError
-      raise ActiveRecord::RecordNotFound
-    end
+      ActiveRecord::Base.transaction do
+        @comment = (@destination.card || @destination.create_card!(status: :in_progress)).comments.create!(params[:comment])
+      end
 
-    respond_to do |format|
-      if @comment.save
+      respond_to do |format|
         format.html { redirect_to destination_card_url(@destination), notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
-      else
+      end
+    rescue
+      respond_to do |format|
         format.html { render 'destinations/cards/show' }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
