@@ -1,16 +1,29 @@
 $ ->
+  EditableForm = $.fn.editableform.Constructor
+  EditableForm.prototype.saveWithUrlHook = (value) ->
+    originalUrl = @options.url
+    resource = @options.resource
+    @options.url = (params) ->
+      # TODO: should not send when create new object
+      if typeof originalUrl == 'function' # user's function
+        originalUrl.call(@, params)
+      else # send ajax to server and return deferred object
+        obj = {}
+        data = {}
+        obj[params.name] = params.value
+        data[resource] = obj
+        ajaxOptions = $.extend({
+          url     : originalUrl
+          data    : data
+          type    : 'PUT' # TODO: should be 'POST' when create new object
+          dataType: 'json'
+        }, @options.ajaxOptions)
+        $.ajax(ajaxOptions)
+    @saveWithoutUrlHook(value)
+  EditableForm.prototype.saveWithoutUrlHook = EditableForm.prototype.save
+  EditableForm.prototype.save = EditableForm.prototype.saveWithUrlHook
+
   $('.comment_body').editable(
     onblur: 'ignore'
-    send: 'always'
     inputclass: 'span9'
-    params: (standard) ->
-      obj = {}
-      data = {}
-      obj[@options.name] = standard.value
-      data[@options.resource] = obj
-      data.name = data.value = data.pk = null
-      data
-    ajaxOptions: {
-      type: 'PUT'
-    }
   )
