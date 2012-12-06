@@ -34,4 +34,5 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rspec-html-matchers'
 end

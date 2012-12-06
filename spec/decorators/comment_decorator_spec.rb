@@ -2,15 +2,13 @@
 require 'spec_helper'
 
 describe CommentDecorator do
-  describe 'vanilla' do
+  describe '#body_html' do
     let(:comment) { Comment.new }
-    subject { decorate(comment) }
-    it { should be_a Comment }
-  end
+    subject { decorate(comment).body_html }
 
-  describe 'body includes linebreak' do
-    let(:comment) { Comment.new(body: "Foo\nBar") }
-    subject { decorate(comment) }
-    its(:body_html) { should eq "Foo<br>Bar" }
+    describe 'body includes linebreak' do
+      before { comment.body =  "Foo\nBar" }
+      it { should eq "Foo<br>Bar" }
+    end
   end
 end

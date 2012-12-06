@@ -2,24 +2,28 @@
 require 'spec_helper'
 
 describe DestinationDecorator do
-  describe 'vanilla' do
-    #let(:destination) { Destination.new.extend DestinationDecorator }
-    let(:destination) { Destination.new }
-    subject { decorate(destination) }
-    it { should be_a Destination }
-    its(:status_label) { should eq '<span class="label none">None</span>' }
-  end
+  describe '#status_label' do
+    subject { decorate(destination).status_label }
 
-  describe 'change status' do
-    before do
-      d = FactoryGirl.create(:sonic_garden)
-      FactoryGirl.create(:sg_card)
-      @destination = decorate(d)
+    describe 'no card' do
+      let(:destination) { Destination.new }
+      it { should have_tag 'span.label.none', text: 'None' }
     end
-    it { @destination.status_label.should eq '<span class="label ready">Ready</span>' }
-    it {
-      @destination.card.status = :sent
-      @destination.status_label.should eq '<span class="label sent">Sent</span>'
-    }
+
+    describe 'change status' do
+      before do
+        FactoryGirl.create(:sg_card)
+      end
+      let(:destination) { FactoryGirl.create(:sonic_garden) }
+
+      context 'initial as ready' do
+        it { should have_tag 'span.label.ready', text: 'Ready' }
+      end
+
+      context 'change to sent' do
+        before { destination.card.status = :sent }
+        it { should have_tag 'span.label.sent', text: 'Sent' }
+      end
+    end
   end
 end
