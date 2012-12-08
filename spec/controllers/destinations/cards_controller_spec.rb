@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe Destinations::CardsController do
+  auth_admin
   before do
     @destination = FactoryGirl.create(:sonic_garden)
   end

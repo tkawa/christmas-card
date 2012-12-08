@@ -34,6 +34,8 @@ describe MembersController do
     {}
   end
 
+  auth_admin
+
   describe "GET index" do
     it "assigns all members as @members" do
       member = Member.create! valid_attributes

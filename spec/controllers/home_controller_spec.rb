@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe HomeController do
+  auth_admin
 
   describe "GET 'index'" do
     it "returns http success" do

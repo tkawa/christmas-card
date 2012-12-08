@@ -34,6 +34,8 @@ describe DestinationsController do
     {}
   end
 
+  auth_admin
+
   describe "GET index" do
     it "assigns all destinations as @destinations" do
       destination = Destination.create! valid_attributes

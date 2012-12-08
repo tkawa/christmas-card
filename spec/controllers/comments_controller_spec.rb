@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe CommentsController do
+  auth_admin
   before do
     @destination = FactoryGirl.create(:sonic_garden)
     @destination_without_card = FactoryGirl.create(:fjord)

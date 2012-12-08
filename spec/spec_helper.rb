@@ -3,6 +3,20 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
+module ControllerMacros
+  def auth_admin
+    before :each do
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials('admin', 'hogehoge')
+    end
+  end
+end
+
+module RequestMacros
+  def auth_admin_header
+    { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials('admin', 'hogehoge') }
+  end
+end
+
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
@@ -59,6 +73,9 @@ Spork.prefork do
     config.after(:each) do
       DatabaseCleaner.clean
     end
+
+    config.extend ControllerMacros, type: :controller
+    config.include RequestMacros, type: :request
   end
 end
 

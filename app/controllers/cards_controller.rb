@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  skip_before_filter :basic_authenticate
+
   # GET /cards/:id
   # GET /cards/:id.json
   def show
