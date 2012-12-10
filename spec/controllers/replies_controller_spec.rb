@@ -35,9 +35,10 @@ describe RepliesController do
     end
 
     describe "with invalid access token of the card" do
-      it "responds not found" do
-        post :create, { card_id: 'invalidxxx', reply: valid_attributes }, valid_session
-        response.status.should be 404
+      it "raises RecordNotFound" do
+        expect {
+          post :create, { card_id: 'invalidxxx', reply: valid_attributes }, valid_session
+        }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -64,10 +65,11 @@ describe RepliesController do
     end
 
     describe "with invalid access token of the card" do
-      it "responds not found" do
+      it "raises RecordNotFound" do
         reply = @card.replies.create! valid_attributes
-        put :update, { id: reply.to_param, card_id: 'invalidxxx', reply: valid_attributes }, valid_session
-        response.status.should be 404
+        expect {
+          put :update, { id: reply.to_param, card_id: 'invalidxxx', reply: valid_attributes }, valid_session
+        }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -84,15 +86,16 @@ describe RepliesController do
       it "redirects to the parent card" do
         reply = @card.replies.create! valid_attributes
         delete :destroy, { id: reply.to_param, card_id: @card.access_token }, valid_session
-        response.should redirect_to(destination_card_url(@card))
+        response.should redirect_to(card_url(@card))
       end
     end
 
     describe "with invalid access token of the card" do
-      it "responds not found" do
+      it "raises RecordNotFound" do
         reply = @card.replies.create! valid_attributes
-        delete :destroy, { id: reply.to_param, card_id: 'invalidxxx', reply: valid_attributes }, valid_session
-        response.status.should be 404
+        expect {
+          delete :destroy, { id: reply.to_param, card_id: 'invalidxxx', reply: valid_attributes }, valid_session
+        }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
