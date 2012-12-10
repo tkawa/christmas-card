@@ -16,17 +16,6 @@ class Destinations::CardsController < ApplicationController
     respond_with @destination, @card, status: status
   end
 
-  # GET /destinations/:destination_id/card/new
-  # GET /destinations/:destination_id/card/new.json
-  def new
-    @card = @destination.build_card
-  end
-
-  # GET /destinations/:destination_id/card/edit
-  def edit
-    @card = @destination.card
-  end
-
   # POST /destinations/:destination_id/card
   # POST /destinations/:destination_id/card.json
   def create

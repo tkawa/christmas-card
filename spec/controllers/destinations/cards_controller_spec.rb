@@ -60,21 +60,6 @@ describe Destinations::CardsController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new card as @card" do
-      get :new, {:destination_id => @destination.id}, valid_session
-      assigns(:card).should be_a_new(Card)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested card as @card" do
-      card = @destination.create_card! valid_attributes
-      get :edit, {:destination_id => @destination.id}, valid_session
-      assigns(:card).should eq(card)
-    end
-  end
-
   describe "POST create" do
     it "not implemented" do
       post :create, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
