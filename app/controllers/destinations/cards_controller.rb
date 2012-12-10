@@ -1,4 +1,5 @@
 class Destinations::CardsController < ApplicationController
+  respond_to :html, :json
   before_filter { @destination = Destination.find(params[:destination_id]) }
 
   # GET /destinations/:destination_id/card
@@ -11,23 +12,14 @@ class Destinations::CardsController < ApplicationController
         flash.now[:notice] = 'Card is not created yet.'
         [@destination.build_card, :not_found]
       end
-    #@card = Card.where(destination_id: params[:destination_id]).first_or_initialize
 
-    respond_to do |format|
-      format.html { render status: status } # show.html.haml
-      format.json { render json: @card, status: status }
-    end
+    respond_with @destination, @card, status: status
   end
 
   # GET /destinations/:destination_id/card/new
   # GET /destinations/:destination_id/card/new.json
   def new
     @card = @destination.build_card
-
-    respond_to do |format|
-      format.html # new.html.haml
-      format.json { render json: @card }
-    end
   end
 
   # GET /destinations/:destination_id/card/edit
@@ -58,7 +50,7 @@ class Destinations::CardsController < ApplicationController
         format.html { redirect_to destination_card_url(@card), notice: 'Card was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", status: :unprocessable_entity }
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end
     end
@@ -70,9 +62,6 @@ class Destinations::CardsController < ApplicationController
     @card = @destination.card
     @card.destroy
 
-    respond_to do |format|
-      format.html { redirect_to destination_card_url(@destination) }
-      format.json { head :no_content }
-    end
+    respond_with @destination, @card, location: destination_card_url(@destination)
   end
 end

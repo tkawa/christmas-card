@@ -136,6 +136,7 @@ describe Destinations::CardsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Card.any_instance.stub(:save).and_return(false)
         put :update, {:destination_id => @destination.id, :card => {  }}, valid_session
+        response.status.should be 422
         response.should render_template("edit")
       end
     end
