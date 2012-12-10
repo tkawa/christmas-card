@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::Base
+class Message < ActiveRecord::Base
   belongs_to :card
   belongs_to :member
   validates :card_id, :member_id, presence: true

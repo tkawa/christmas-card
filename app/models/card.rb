@@ -1,7 +1,7 @@
 class Card < ActiveRecord::Base
   extend Enumerize
   belongs_to :destination
-  has_many :comments
+  has_many :messages
   has_many :replies
   enumerize :status, in: [:in_progress, :ready, :sent], predicates: true
   validates :destination_id, presence: true
@@ -12,13 +12,13 @@ class Card < ActiveRecord::Base
   before_validation :generate_access_token
 
   def written_members
-    Member.where(Member.arel_table[:id].in(Comment.where(card_id: id).select(:member_id).uniq.arel))
-    # SELECT * FROM members WHERE members.id IN (SELECT DISTINCT member_id FROM comments WHERE comments.card_id == {id})
+    Member.where(Member.arel_table[:id].in(Message.where(card_id: id).select(:member_id).uniq.arel))
+    # SELECT * FROM members WHERE members.id IN (SELECT DISTINCT member_id FROM messages WHERE messages.card_id == {id})
   end
 
   def unwritten_members
-    Member.where(Member.arel_table[:id].not_in(Comment.where(card_id: id).select(:member_id).uniq.arel))
-    # SELECT * FROM members WHERE members.id NOT IN (SELECT DISTINCT member_id FROM comments WHERE comments.card_id == {id})
+    Member.where(Member.arel_table[:id].not_in(Message.where(card_id: id).select(:member_id).uniq.arel))
+    # SELECT * FROM members WHERE members.id NOT IN (SELECT DISTINCT member_id FROM messages WHERE messages.card_id == {id})
   end
 
   def generate_access_token

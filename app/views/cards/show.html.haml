@@ -5,9 +5,9 @@
 
 %h3 Messages
 
-%dl.comments
-  - @card.comments.each do |comment|
-    = render partial: 'comments/comment', locals: { comment: comment }
+%dl.messages
+  - @card.messages.each do |message|
+    = render partial: 'messages/message', locals: { message: message }
 
 %h3 Replies
 

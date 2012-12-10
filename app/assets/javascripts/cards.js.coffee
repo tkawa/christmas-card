@@ -1,5 +1,5 @@
 $ ->
-  $('.comment_body, .reply_body').editable(
+  $('.message_body, .reply_body').editable(
     onblur: 'ignore'
     inputclass: 'span9'
   )

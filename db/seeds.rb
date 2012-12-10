@@ -4,7 +4,7 @@ factory_names = {
   destination: 1..2,
   card: 1..1,
   member: 1..3,
-  comment: 1..1,
+  message: 1..1,
   reply: 1..1
 }
 

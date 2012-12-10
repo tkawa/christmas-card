@@ -18,14 +18,14 @@
 
 %h3 Messages
 
-%dl.comments
-  - @card.comments.each do |comment|
-    = render partial: 'comments/comment_editable', locals: { comment: comment }
+%dl.messages
+  - @card.messages.each do |message|
+    = render partial: 'messages/message_editable', locals: { message: message }
 
-= form_tag destination_card_comments_path(@destination) do
+= form_tag destination_card_messages_path(@destination) do
   Add:
   - @card.unwritten_members.each do |member|
-    = button_tag member.name, name: 'comment[member_id]', value: member.id, class: 'btn btn-small'
+    = button_tag member.name, name: 'message[member_id]', value: member.id, class: 'btn btn-small'
 
 %h3 Replies
 

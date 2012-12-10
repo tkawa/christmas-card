@@ -32,7 +32,7 @@ button.delete {
   @extend .btn-danger;
   @extend .btn-mini;
 }
-dl.comments button.delete,
+dl.messages button.delete,
 dl.replies button.delete {
   @extend .pull-right;
 }

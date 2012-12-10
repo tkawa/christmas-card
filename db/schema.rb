@@ -24,17 +24,6 @@ ActiveRecord::Schema.define(:version => 20121210190718) do
   add_index "cards", ["access_token"], :name => "index_cards_on_access_token", :unique => true
   add_index "cards", ["destination_id"], :name => "index_cards_on_destination_id"
 
-  create_table "comments", :force => true do |t|
-    t.text     "body",       :default => "", :null => false
-    t.integer  "card_id",                    :null => false
-    t.integer  "member_id",                  :null => false
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-  end
-
-  add_index "comments", ["card_id"], :name => "index_comments_on_card_id"
-  add_index "comments", ["member_id"], :name => "index_comments_on_member_id"
-
   create_table "destinations", :force => true do |t|
     t.string   "email",      :default => "", :null => false
     t.string   "name",       :default => "", :null => false
@@ -48,6 +37,17 @@ ActiveRecord::Schema.define(:version => 20121210190718) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "messages", :force => true do |t|
+    t.text     "body",       :default => "", :null => false
+    t.integer  "card_id",                    :null => false
+    t.integer  "member_id",                  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "messages", ["card_id"], :name => "index_messages_on_card_id"
+  add_index "messages", ["member_id"], :name => "index_messages_on_member_id"
 
   create_table "replies", :force => true do |t|
     t.string   "name",       :default => "", :null => false

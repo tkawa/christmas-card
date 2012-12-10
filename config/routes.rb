@@ -1,7 +1,7 @@
 ChristmasCard::Application.routes.draw do
   resources :destinations do
     resource :card, controller: 'destinations/cards', only: [:show, :create, :update, :destroy], shallow: true do
-      resources :comments
+      resources :messages
     end
   end
   resources :members

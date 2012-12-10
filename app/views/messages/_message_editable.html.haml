@@ -1,0 +1,8 @@
+%dt
+  = image_tag message.member.image_url
+  = message.member.name
+  = form_for message, method: :delete, html: { class: 'only_button', id: nil } do |f|
+    = f.button 'Delete', confirm: 'Are you sure to delete?', class: 'delete'
+%dd
+  %a.message_body{data: {type: 'textarea', resource: 'message', name: 'body', emptytext: 'Enter your message', url: message_path(message)}}<
+    ~ message.body_html
