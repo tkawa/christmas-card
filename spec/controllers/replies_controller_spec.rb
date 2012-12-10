@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe RepliesController do
-  auth_admin
   before do
     @card = FactoryGirl.create(:card_1)
   end

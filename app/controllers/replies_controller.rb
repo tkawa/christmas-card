@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+  skip_before_filter :basic_authenticate
   respond_to :html, :json
   before_filter { @card = Card.find_by_access_token!(params[:card_id]) }
   before_filter only: [:update, :destroy] do
