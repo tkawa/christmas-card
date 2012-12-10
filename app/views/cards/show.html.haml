@@ -3,9 +3,13 @@
 
 %p= image_tag 'xmas71.jpg'
 
+%h3 Messages
+
 %dl.comments
   - @card.comments.each do |comment|
     = render partial: 'comments/comment', locals: { comment: comment }
+
+%h3 Replies
 
 %dl.replies
   - @card.replies.each do |reply|
