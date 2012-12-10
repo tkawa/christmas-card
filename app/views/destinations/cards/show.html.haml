@@ -25,6 +25,10 @@
   - @card.unwritten_members.each do |member|
     = button_tag member.name, name: 'comment[member_id]', value: member.id, class: 'btn btn-small'
 
+%dl.replies
+  - @card.replies.each do |reply|
+    = render partial: 'replies/reply', locals: { reply: reply }
+
 %br
 = link_to 'Back', destinations_path
 

@@ -7,6 +7,13 @@
   - @card.comments.each do |comment|
     = render partial: 'comments/comment', locals: { comment: comment }
 
+%dl.replies
+  - @card.replies.each do |reply|
+    = render partial: 'replies/reply_editable', locals: { reply: reply }
+
+= form_tag card_replies_path(card_id: @card.access_token) do
+  = button_tag 'Add', class: 'btn btn-small'
+
 %p
   Image credits:
   = link_to nil, 'http://www.imagehearts.com/ip/'

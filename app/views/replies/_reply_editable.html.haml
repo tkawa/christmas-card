@@ -1,0 +1,8 @@
+%dt
+  %a.reply_name{data: {type: 'text', resource: 'reply', name: 'name', url: card_reply_path(card_id: reply.card.access_token, id: reply.id)}}<
+    ~ reply.name
+  = form_for reply, url: card_reply_path(card_id: reply.card.access_token, id: reply.id), method: :delete, html: { class: 'only_button', id: nil } do |f|
+    = f.button 'Delete', confirm: 'Are you sure to delete?', class: 'delete'
+%dd
+  %a.reply_body{data: {type: 'textarea', resource: 'reply', name: 'body', url: card_reply_path(card_id: reply.card.access_token, id: reply.id)}}<
+    ~ reply.body
