@@ -9,20 +9,20 @@ class RepliesController < ApplicationController
   # POST /cards/:card_id/replies.json
   def create
     @reply = @card.replies.create(params[:reply])
-    respond_with @card
+    respond_with @card, location: card_url(id: @card.access_token)
   end
 
   # PUT /cards/:card_id/replies/:id
   # PUT /cards/:card_id/replies/:id.json
   def update
     @reply.update_attributes(params[:reply])
-    respond_with @card
+    respond_with @card, location: card_url(id: @card.access_token)
   end
 
   # DELETE /cards/:card_id/replies/:id
   # DELETE /cards/:card_id/replies/:id.json
   def destroy
     @reply.destroy
-    respond_with @card
+    respond_with @card, location: card_url(id: @card.access_token)
   end
 end

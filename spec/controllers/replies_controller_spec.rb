@@ -30,7 +30,7 @@ describe RepliesController do
 
       it "redirects to the parent card" do
         post :create, { card_id: @card.access_token, reply: valid_attributes }, valid_session
-        response.should redirect_to(card_url(Reply.last.card))
+        response.should redirect_to(card_url(id: Reply.last.card.access_token))
       end
     end
 
@@ -60,7 +60,7 @@ describe RepliesController do
       it "redirects to the parent card" do
         reply = @card.replies.create! valid_attributes
         put :update, { id: reply.to_param, card_id: @card.access_token, reply: valid_attributes }, valid_session
-        response.should redirect_to(card_url(@card))
+        response.should redirect_to(card_url(id: @card.access_token))
       end
     end
 
@@ -86,7 +86,7 @@ describe RepliesController do
       it "redirects to the parent card" do
         reply = @card.replies.create! valid_attributes
         delete :destroy, { id: reply.to_param, card_id: @card.access_token }, valid_session
-        response.should redirect_to(card_url(@card))
+        response.should redirect_to(card_url(id: @card.access_token))
       end
     end
 
