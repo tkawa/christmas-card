@@ -4,5 +4,5 @@
   = form_for comment, method: :delete, html: { class: 'only_button', id: nil } do |f|
     = f.button 'Delete', confirm: 'Are you sure to delete?', class: 'delete'
 %dd
-  %a.comment_body{data: {type: 'textarea', resource: 'comment', name: 'body', url: comment_path(comment)}}<
+  %a.comment_body{data: {type: 'textarea', resource: 'comment', name: 'body', emptytext: 'Enter your message', url: comment_path(comment)}}<
     ~ comment.body_html
