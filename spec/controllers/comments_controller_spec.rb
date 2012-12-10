@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe MessagesController do
-  auth_admin
   before do
+    auth_admin
     @destination = FactoryGirl.create(:destination_1)
     @destination_without_card = FactoryGirl.create(:destination_2)
     @card = FactoryGirl.create(:card_1)

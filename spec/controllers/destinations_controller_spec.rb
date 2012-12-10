@@ -34,7 +34,9 @@ describe DestinationsController do
     {}
   end
 
-  auth_admin
+  before do
+    auth_admin
+  end
 
   describe "GET index" do
     it "assigns all destinations as @destinations" do

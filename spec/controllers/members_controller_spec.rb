@@ -34,7 +34,9 @@ describe MembersController do
     {}
   end
 
-  auth_admin
+  before do
+    auth_admin
+  end
 
   describe "GET index" do
     it "assigns all members as @members" do
