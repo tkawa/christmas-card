@@ -8,6 +8,8 @@ class Card < ActiveRecord::Base
   validates :access_token, uniqueness: { allow_nil: true }
   attr_accessible :status
 
+  before_validation :generate_access_token
+
   def written_members
     Member.where(Member.arel_table[:id].in(Comment.where(card_id: id).select(:member_id).uniq.arel))
     # SELECT * FROM members WHERE members.id IN (SELECT DISTINCT member_id FROM comments WHERE comments.card_id == {id})
@@ -19,7 +21,9 @@ class Card < ActiveRecord::Base
   end
 
   def generate_access_token
-    if access_token.blank?
+    if in_progress?
+      self.access_token = nil
+    elsif ready? || sent?
       self.access_token = SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')
     end
   end

@@ -102,6 +102,13 @@ describe Destinations::CardsController do
         put :update, {:destination_id => @destination.id, :card => { "status" => "ready" }}, valid_session
       end
 
+      #it "generates the access token" do
+      #  card = @destination.create_card! valid_attributes
+      #  put :update, {:destination_id => @destination.id, :card => { "status" => "ready" }}, valid_session
+      #  card.status.should eq("ready")
+      #  card.access_token.should_not be_nil
+      #end
+
       it "assigns the requested card as @card" do
         card = @destination.create_card! valid_attributes
         put :update, {:destination_id => @destination.id, :card => valid_attributes}, valid_session
