@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202085308) do
+ActiveRecord::Schema.define(:version => 20121210190718) do
 
   create_table "cards", :force => true do |t|
     t.string   "status",         :default => "in_progress", :null => false
@@ -48,5 +48,15 @@ ActiveRecord::Schema.define(:version => 20121202085308) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "replies", :force => true do |t|
+    t.string   "name",       :default => "", :null => false
+    t.text     "body",       :default => "", :null => false
+    t.integer  "card_id",                    :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "replies", ["card_id"], :name => "index_replies_on_card_id"
 
 end
