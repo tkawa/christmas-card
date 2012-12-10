@@ -1,21 +1,15 @@
 require 'factory_girl'
 
-Destination.delete_all
-Card.delete_all
-Member.delete_all
-Comment.delete_all
+factory_names = {
+  destination: 1..2,
+  card: 1..1,
+  member: 1..3,
+  comment: 1..1
+}
 
-# Destination
-FactoryGirl.create(:sonic_garden)
-FactoryGirl.create(:fjord)
-
-# Card
-FactoryGirl.create(:sg_card)
-
-# Member
-FactoryGirl.create(:ppworks)
-FactoryGirl.create(:fukajun)
-FactoryGirl.create(:tkawa)
-
-# Comment
-FactoryGirl.create(:merry_happy)
+factory_names.each do |model, range|
+  model.to_s.camelize.constantize.delete_all
+  range.each do |i|
+    FactoryGirl.create("#{model.to_s}_#{i}".to_sym)
+  end
+end

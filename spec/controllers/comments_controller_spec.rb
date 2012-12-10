@@ -3,9 +3,9 @@ require 'spec_helper'
 describe CommentsController do
   auth_admin
   before do
-    @destination = FactoryGirl.create(:sonic_garden)
-    @destination_without_card = FactoryGirl.create(:fjord)
-    @card = FactoryGirl.create(:sg_card)
+    @destination = FactoryGirl.create(:destination_1)
+    @destination_without_card = FactoryGirl.create(:destination_2)
+    @card = FactoryGirl.create(:card_1)
   end
 
   def valid_attributes

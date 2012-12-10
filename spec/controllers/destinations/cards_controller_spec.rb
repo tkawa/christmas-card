@@ -21,7 +21,7 @@ require 'spec_helper'
 describe Destinations::CardsController do
   auth_admin
   before do
-    @destination = FactoryGirl.create(:sonic_garden)
+    @destination = FactoryGirl.create(:destination_1)
   end
 
   # This should return the minimal set of attributes required to create a valid

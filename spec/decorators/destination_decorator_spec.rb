@@ -12,9 +12,9 @@ describe DestinationDecorator do
 
     describe 'change status' do
       before do
-        FactoryGirl.create(:sg_card)
+        FactoryGirl.create(:card_1)
       end
-      let(:destination) { FactoryGirl.create(:sonic_garden) }
+      let(:destination) { FactoryGirl.create(:destination_1) }
 
       context 'initial as ready' do
         it { should have_tag 'span.label.ready', text: 'Ready' }

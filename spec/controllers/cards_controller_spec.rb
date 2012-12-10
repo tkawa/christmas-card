@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CardsController do
-  let(:card) { FactoryGirl.create(:sg_card) }
+  let(:card) { FactoryGirl.create(:card_1) }
   describe "GET show" do
     before { get 'show', id: card.access_token }
     context "responds successfully" do
