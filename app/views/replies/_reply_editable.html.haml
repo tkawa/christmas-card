@@ -5,4 +5,4 @@
     = f.button 'Delete', confirm: 'Are you sure to delete?', class: 'delete'
 %dd
   %a.reply_body{data: {type: 'textarea', resource: 'reply', name: 'body', emptytext: 'Enter reply', url: card_reply_path(card_id: reply.card.access_token, id: reply.id)}}<
-    ~ reply.body
+    ~ reply.body_html

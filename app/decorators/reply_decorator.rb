@@ -1,4 +1,4 @@
 # coding: utf-8
-module MessageDecorator
+module ReplyDecorator
   include TextareaDecorator
 end
