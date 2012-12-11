@@ -76,7 +76,7 @@ class MembersController < ApplicationController
     @member.destroy
 
     respond_to do |format|
-      format.html { redirect_to members_url }
+      format.html { redirect_to members_url, notice: 'Member was successfully deleted.' }
       format.json { head :no_content }
     end
   end

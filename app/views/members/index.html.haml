@@ -1,20 +1,20 @@
 %h1 Listing members
 
-%table
+%table.table.table-striped
   %tr
     %th Name
     %th Image url
     %th
     %th
-    %th
 
   - @members.each do |member|
     %tr
-      %td= member.name
+      %th= member.name
       %td= member.image_url
-      %td= link_to 'Show', member
       %td= link_to 'Edit', edit_member_path(member)
-      %td= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' }
+      %td
+        = form_for member, method: :delete, html: { class: 'only_button', id: nil } do |f|
+          = f.button 'Delete', confirm: 'Are you sure to delete?', class: 'delete'
 
 %br
 
