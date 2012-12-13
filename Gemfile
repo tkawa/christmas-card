@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.9'
 
-gem 'sqlite3'
 gem 'jquery-rails'
 gem 'thin', '>= 1.5.0'
 gem 'haml', '>= 3.1.7'
@@ -10,6 +9,7 @@ gem 'simple_form', '>= 2.0.4'
 gem 'enumerize'
 gem 'active_decorator', git: 'git://github.com/sinsoku/active_decorator.git', branch: 'support_rspec'
 gem 'bootstrap-editable-rails'
+gem 'factory_girl_rails', '>= 4.1.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -23,17 +23,22 @@ group :development do
   gem 'ruby_parser', '>= 3.0.1'
   gem 'quiet_assets', '>= 1.0.1'
   gem 'hub', '>= 1.10.2', require: nil
+  gem 'heroku'
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails', '>= 2.11.4'
   gem 'capybara', '>= 1.1.3'
   gem 'database_cleaner', '>= 0.9.1'
   gem 'email_spec', '>= 1.4.0'
-  gem 'factory_girl_rails', '>= 4.1.0'
   gem 'spork'
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'rspec-html-matchers'
+end
+
+group :production do
+  gem 'pg'
 end
